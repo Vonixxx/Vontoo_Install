@@ -1,6 +1,6 @@
 module Variables where
 
 hide          = "&> /dev/null"
-linkVonixOS   = "github:Vonixxx/VonixOS"
+linkVonixOS   = "github:Vonixxx/Vontoo"
 linkDisko     = "github:nix-community/disko"
-linkDiskSetup = "https://raw.githubusercontent.com/Vonixxx/VonixOS/master/system/configuration/disk/default.nix"
+linkDiskSetup = "https://raw.githubusercontent.com/Vonixxx/Vontoo/master/system/configuration/disk/default.nix"
