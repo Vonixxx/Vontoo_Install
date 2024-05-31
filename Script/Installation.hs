@@ -5,23 +5,14 @@ import Text.Printf    ( printf )
 import System.Process ( callCommand )
 
 installation = do
- putStrLn "\nUpdating Flake..."
-
- callCommand $ printf "cd /mnt && nix flake update %s %s" 
-               linkVonixOS
-               hide
-
- putStrLn "Updating Flake - Successful.\n"
- ---
- putStrLn "(Format: Richard Nixon --> n-richard)"
+ putStrLn "Input your name. (Format: Richard Nixon --> n-richard)"
  putStr   "Name: "
 
  user <- getLine
  ---
  putStrLn "\nSystem Installation..."
 
- callCommand $ printf "nixos-install --no-write-lock-file --flake %s#%s"
-                      linkVonixOS
+ callCommand $ printf "cd /mnt && nix-shell -p nixVersions.latest --run 'nixos-install --flake github:Vonixxx/Vontoo#%s"
                       user
 
  putStrLn "System Installation - Successful."
