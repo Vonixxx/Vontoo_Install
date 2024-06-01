@@ -7,7 +7,7 @@ import System.Process ( callCommand )
 partitioning = do
  putStrLn "\nAcquiring Partitioning Module..."
 
- callCommand $ printf "cp %s /tmp/partitioning.nix %s"
+ callCommand $ printf "curl %s -o /tmp/partitioning.nix %s"
                       linkDiskSetup
                       hide
 
