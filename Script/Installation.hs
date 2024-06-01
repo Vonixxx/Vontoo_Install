@@ -12,7 +12,7 @@ installation = do
  ---
  putStrLn "\nSystem Installation..."
 
- callCommand $ printf "nix-shell -p nixVersions.latest --run 'nixos-install --root /mnt --no-root-passwd --flake /home/vonixos/Vontoo#%s"
+ callCommand $ printf "nix-shell -p nixVersions.latest --run 'nixos-install --root /mnt --no-root-passwd --flake /home/vonixos/Vontoo#%s'"
                       user
 
  putStrLn "System Installation - Successful."
