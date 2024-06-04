@@ -40,17 +40,14 @@ in {
  };
 
   services = {
-    displayManager = {
-      gdm.enable = true;
-
-      autoLogin = {
-        enable = true;
-        user   = "VontooInstall";
-      };
+    displayManager.autoLogin = {
+      enable = true;
+      user   = "VontooInstall";
     };
 
     xserver = {
       enable                      = true;
+      gdm.enable                  = true;
       desktopManager.gnome.enable = true;
 
       excludePackages = [
