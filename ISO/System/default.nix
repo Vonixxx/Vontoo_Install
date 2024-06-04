@@ -18,6 +18,11 @@ in {
    "quiet"
  ];
 
+ zramSwap = {
+   memoryPercent = 100;
+   enable        = true;
+ };
+
  nix.settings.experimental-features = [
    "flakes"
    "nix-command"
@@ -39,26 +44,27 @@ in {
    sudo.wheelNeedsPassword = false;
  };
 
-  services = {
-    displayManager.autoLogin = {
-      enable = true;
-      user   = "VontooInstall";
-    };
-
-    xserver = {
-      enable                      = true;
-      displayManager.gdm.enable   = true;
-      desktopManager.gnome.enable = true;
-
-      excludePackages = [
-        pkgs.xterm
-      ];
-    };
-  };
+#  services = {
+#    displayManager.autoLogin = {
+#      enable = true;
+#      user   = "VontooInstall";
+#    };
+#
+#    xserver = {
+#      enable                      = true;
+#      displayManager.gdm.enable   = true;
+#      desktopManager.gnome.enable = true;
+#
+#      excludePackages = [
+#        pkgs.xterm
+#      ];
+#    };
+#  };
 
  users.users.vontoo = {
    uid          = 1000;
    isNormalUser = true;
+   password     = "111";
    name         = "VontooInstall";
    home         = "/home/VontooInstall";
 
