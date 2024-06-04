@@ -81,18 +81,16 @@ in {
  environment.systemPackages = let
   start = writeScriptBin "start" ''
      nmtui connect
-     mkdir Haskell
+
      echo Fetching Script...
-     curl https://raw.githubusercontent.com/Vonixxx/Vontoo_Install/main/Script/Main.hs         -o ./Haskell/Main.hs         &> /dev/null &&
-     curl https://raw.githubusercontent.com/Vonixxx/Vontoo_Install/main/Script/Variables.hs    -o ./Haskell/Variables.hs    &> /dev/null &&
-     curl https://raw.githubusercontent.com/Vonixxx/Vontoo_Install/main/Script/Installation.hs -o ./Haskell/Installation.hs &> /dev/null &&
-     curl https://raw.githubusercontent.com/Vonixxx/Vontoo_Install/main/Script/Partitioning.hs -o ./Haskell/Partitioning.hs &> /dev/null &&
+     git clone https://github.com/Vonixxx/Vontoo_Install
+     sleep 3
      echo Fetching Script - Successful.
-     cd ./Haskell
+
+     cd ./Vontoo_Install/Script
      sudo runhaskell ./Main.hs
   '';
  in with pkgs; [
-   curl
    git
    ghc
    helix

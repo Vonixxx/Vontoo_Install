@@ -1,18 +1,32 @@
 module Installation where
 
-import Variables
 import Text.Printf    ( printf )
 import System.Process ( callCommand )
 
+vontoo = "github:Vonixxx/Vontoo"
+disko  = "github:nix-community/disko#disko-install"
+
 installation = do
- putStrLn "Input your name. (Format: Richard Nixon --> N_Richard)"
+ callCommand "\nlsblk --nodeps --output NAME,SIZE"
+
+ putStrLn "Pick the largest in size."
+ putStrLn "Either 'sda' or 'nvme0n1'"
+ putStr   "Disk: "
+
+ disk <- getLine
+---
+ callCommand "\nnix flake show github:Vonixxx/Vontoo"
+
+ putStrLn "Input your name as seen in the list. (Format: Richard Nixon --> N_Richard)"
  putStr   "Name: "
 
  user <- getLine
- ---
- putStrLn "\nSystem Installation..."
+---
+ putStrLn "\nSystem Installation...\n"
 
- callCommand $ printf "nix-shell -p nixVersions.latest --run 'nixos-install --root /mnt --no-root-passwd --flake github:Vonixxx/Vontoo#%s'"
+ callCommand $ printf "nix run '%s' -- --flake '%s#%s' --disk main /dev/nvme0n1"
+                      disko
+                      vontoo
                       user
 
- putStrLn "System Installation - Successful."
+ putStrLn "\nSystem Installation - Successful."
