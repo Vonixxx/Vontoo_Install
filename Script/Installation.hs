@@ -24,9 +24,10 @@ installation = do
 ---
  putStrLn "\nSystem Installation...\n"
 
- callCommand $ printf "nix run '%s' -- --flake '%s#%s' --disk main /dev/nvme0n1"
+ callCommand $ printf "nix run '%s' -- --flake '%s#%s' --disk main /dev/%s"
                       disko
                       vontoo
                       user
+                      disk
 
  putStrLn "\nSystem Installation - Successful."
