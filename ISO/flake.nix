@@ -27,7 +27,7 @@
 
 let
  systemModules = [
-   ./System/default.nix
+   ./System
  ];
 
  mkSystem = extraOverlays:
@@ -39,7 +39,7 @@ let
      };
 
      modules = extraModules
-               systemModules;
+               ++ systemModules;
 
      pkgs = import nixpkgs {
        config.allowUnfree = true;
@@ -53,7 +53,7 @@ in {
                         [];
 
      SteamDeck = mkSystem [ jovian.overlays.default ]
-                          [ jovian.nixosModules.jovian ./System/SteamDeck/default.nix ];
+                          [ jovian.nixosModules.jovian ./System/SteamDeck ];
    };
  };
 }
