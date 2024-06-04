@@ -73,7 +73,7 @@ in {
  isoImage = {
    makeEfiBootable     = true;
    makeUsbBootable     = true;
-   isoBaseName         = "Vontoo.iso";
+   isoBaseName         = "Vontoo";
    squashfsCompression = "gzip -Xcompression-level 1";
    isoName             = "${config.isoImage.isoBaseName}.iso";
  };
