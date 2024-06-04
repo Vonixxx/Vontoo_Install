@@ -5,7 +5,7 @@ import Text.Printf    ( printf )
 import System.Process ( callCommand )
 
 installation = do
- putStrLn "Input your name. (Format: Richard Nixon --> n-richard)"
+ putStrLn "Input your name. (Format: Richard Nixon --> N_Richard)"
  putStr   "Name: "
 
  user <- getLine

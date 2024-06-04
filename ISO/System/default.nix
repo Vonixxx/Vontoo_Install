@@ -88,7 +88,8 @@ in {
      curl https://raw.githubusercontent.com/Vonixxx/Vontoo_Install/main/Script/Installation.hs -o ./Haskell/Installation.hs &> /dev/null &&
      curl https://raw.githubusercontent.com/Vonixxx/Vontoo_Install/main/Script/Partitioning.hs -o ./Haskell/Partitioning.hs &> /dev/null &&
      echo Fetching Script - Successful.
-     sudo runhaskell ./Haskell/Main.hs
+     cd ./Haskell
+     sudo runhaskell ./Main.hs
   '';
  in with pkgs; [
    curl
