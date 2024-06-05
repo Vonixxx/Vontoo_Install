@@ -24,7 +24,7 @@ installation = do
 ---
  putStrLn "\nSystem Installation...\n"
 
- callCommand $ printf "nix run '%s' -- --dry-run --flake '%s#%s' --mode format --disk main /dev/%s --write-efi-boot-entries"
+ callCommand $ printf "nix run '%s' -- --dry-run --flake '%s#%s' --mode format --disk main /dev/%s"
                       disko
                       vontoo
                       user
