@@ -44,22 +44,22 @@ in {
    sudo.wheelNeedsPassword = false;
  };
 
-#  services = {
-#    displayManager.autoLogin = {
-#      enable = true;
-#      user   = "VontooInstall";
-#    };
-#
-#    xserver = {
-#      enable                      = true;
-#      displayManager.gdm.enable   = true;
-#      desktopManager.gnome.enable = true;
-#
-#      excludePackages = [
-#        pkgs.xterm
-#      ];
-#    };
-#  };
+  services = {
+    displayManager.autoLogin = {
+      enable = true;
+      user   = "VontooInstall";
+    };
+
+    xserver = {
+      enable                      = true;
+      displayManager.gdm.enable   = true;
+      desktopManager.gnome.enable = true;
+
+      excludePackages = [
+        pkgs.xterm
+      ];
+    };
+  };
 
  users.users.vontoo = {
    uid          = 1000;
@@ -87,9 +87,10 @@ in {
  environment.systemPackages = let
   start = writeScriptBin "start" ''
      nmtui connect
+     clear
 
      echo Fetching Script...
-     git clone https://github.com/Vonixxx/Vontoo_Install
+     git clone https://github.com/Vonixxx/Vontoo_Instal &> /dev/null
      sleep 3
      echo Fetching Script - Successful.
 
