@@ -39,7 +39,7 @@ let
      --title="Select Profile" \
      --text="Last name's initial followed by your first name, as such:" \
      --entry-text "Richard Nixon -> N_Richard")
-    
+
     if [ -n "$profile" ]; then
      sudo nix-shell -p nixVersions.latest --run 'nixos-install --root /mnt --no-root-passwd --flake github:Vonixxx/Vontoo#'"$profile"
     else
