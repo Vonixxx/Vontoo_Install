@@ -30,18 +30,23 @@ let
        $lsblk_device_nvme $lsblk_device_nvme_size)
 
     if [ -n "$selected_disk" ]; then
-      sudo nix run "$link_disko" -- --mode disko /tmp/disk.nix --arg device "/dev/$selected_disk"
+     sudo nix run "$link_disko" -- --mode disko /tmp/disk.nix --arg device "/dev/$selected_disk"
     else
-      echo "No disk selected"
+     echo "No disk selected"
     fi
 
-    if zenity --entry \
+    profile=$(zenity --entry \
      --title="Select Profile" \
      --text="Last name's initial followed by your first name, as such:" \
-     --entry-text "Richard Nixon -> N_Richard"
-       then nix-shell -p nixVersions.latest --run 'nixos-install --root /mnt --no-root-passwd --flake github:Vonixxx/Vontoo#$?'
-       else echo "No name selected"
+     --entry-text "Richard Nixon -> N_Richard")
+    
+    if [ -n "$profile" ]; then
+     sudo nix-shell -p nixVersions.latest --run 'nixos-install --root /mnt --no-root-passwd --flake github:Vonixxx/Vontoo#'"$profile"
+    else
+     echo "No profile selected"
     fi
+
+    reboot
  '';
 in {
  imports = [
@@ -50,13 +55,19 @@ in {
 
  system.stateVersion = "24.11";
 
- environment.systemPackages = with pkgs; with gnome; [
-   git
-   ghc
-   helix
-   start
-   zenity
- ];
+ environment = {
+   gnome.excludePackages = with pkgs; [
+     gnome-tour
+   ];
+
+   systemPackages = with pkgs; with gnome; [
+     git
+     ghc
+     helix
+     start
+     zenity
+   ];
+ };
 
  boot.kernelParams = [
    "quiet"
