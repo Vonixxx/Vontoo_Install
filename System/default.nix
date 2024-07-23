@@ -1,12 +1,16 @@
-{ pkgs
+{ lib
+, pkgs
 , config
 , modulesPath
 , ...
 }:
 
 let
+ inherit (lib)
+  mkDefault;
+
  inherit (pkgs)
-  mkDefault writeScriptBin;
+  writeScriptBin;
 
  start = writeScriptBin "start" ''
     lsblk_device_sda=$(lsblk -n -d -I 8 -o NAME)
