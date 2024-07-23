@@ -6,7 +6,7 @@
 
 let
  inherit (pkgs)
-  writeScriptBin;
+  mkDefault writeScriptBin;
 
  start = writeScriptBin "start" ''
     lsblk_device_sda=$(lsblk -n -d -I 8 -o NAME)
@@ -73,11 +73,6 @@ in {
    "quiet"
  ];
 
- zramSwap = {
-   memoryPercent = 100;
-   enable        = true;
- };
-
  nix.settings.experimental-features = [
    "flakes"
    "nix-command"
@@ -134,7 +129,7 @@ in {
  isoImage = {
    makeEfiBootable     = true;
    makeUsbBootable     = true;
-   isoBaseName         = "Vontoo";
+   isoBaseName         = mkDefault "Vontoo_Vanilla";
    squashfsCompression = "gzip -Xcompression-level 1";
    isoName             = "${config.isoImage.isoBaseName}.iso";
  };
