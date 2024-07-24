@@ -34,7 +34,7 @@ let
        $lsblk_device_nvme $lsblk_device_nvme_size)
 
     if [ -n "$selected_disk" ]; then
-     sudo nix run "$link_disko" -- --mode disko /tmp/disk.nix --arg device "/dev/$selected_disk"
+     sudo nix run "$link_disko" -- --mode disko /tmp/disk.nix --argstr device "/dev/$selected_disk"
     else
      echo "No disk selected"
     fi
@@ -82,9 +82,13 @@ in {
    "nix-command"
  ];
 
- hardware.bluetooth = {
-   enable      = true;
-   powerOnBoot = true;
+ hardware = {
+   enableRedistributableFirmware = true;
+
+   bluetooth = {
+     enable      = true;
+     powerOnBoot = true;
+   };
  };
 
  networking = {
