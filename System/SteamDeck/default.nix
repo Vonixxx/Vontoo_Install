@@ -5,6 +5,7 @@
 
  boot.kernelPatches = [
    {
+    patch = null;
     extraMakeFlags = ["O=/home/Bubinka"];
    }
  ];
