@@ -75,6 +75,7 @@ in {
 
  boot.kernelParams = [
    "quiet"
+   "splash"
  ];
 
  nix.settings.experimental-features = [

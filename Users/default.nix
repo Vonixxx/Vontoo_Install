@@ -10,9 +10,9 @@
 
  SteamDeck = mkSystem "/SteamDeck"
                       [
-                       jovian.nixosModules.jovian
+                       jovian.overlays.default
                       ]
                       [
-                       jovian.overlays.default
+                       jovian.nixosModules.jovian
                       ];
 }
