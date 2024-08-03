@@ -5,10 +5,6 @@
 #################
 {
  inputs = {
-   ##########################
-   # Synchronizing Packages #
-   ##########################
-   jovian.inputs.nixpkgs.follows = "nixpkgs";
    #########################
    # Official Repositories #
    #########################
@@ -26,34 +22,35 @@
  }:
 
 let
- systemModules = [
-   ./System
- ];
-
- mkSystem = extraOverlays:
-            extraModules:
-   nixpkgs.lib.nixosSystem rec {
-     specialArgs = {
-       inherit
-       pkgs;
-     };
-
-     modules = extraModules
-               ++ systemModules;
-
-     pkgs = import nixpkgs {
-       config.allowUnfree = true;
-       overlays           = extraOverlays;
-       system             = "x86_64-linux";
-     };
+ mkSystem =
+ profile:
+ extraOverlays:
+ extraModules:
+ nixpkgs.lib.nixosSystem rec {
+   specialArgs = {
+     inherit
+     pkgs;
    };
+
+   modules = [
+    (./Users + profile)
+   ] ++ [
+    ./Users/Vanilla
+   ] ++ extraModules;
+
+   pkgs = import nixpkgs {
+     config.allowUnfree = true;
+     overlays           = extraOverlays;
+     system             = "x86_64-linux";
+   };
+ };
 in {
- nixosConfigurations = {
-     Vanilla = mkSystem []
-                        [];
-
-     SteamDeck = mkSystem [ jovian.overlays.default ]
-                          [ jovian.nixosModules.jovian ./System/SteamDeck ];
-   };
+   nixosConfigurations = (
+     import ./Users {
+      inherit
+       jovian
+       mkSystem;
+     }
+   );
  };
 }
